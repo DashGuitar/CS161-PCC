@@ -1,0 +1,26 @@
+// Program to convert Fahrenheit to Celsius
+// Writen by: Dashel Ruiz Perez
+// Date: 1/18/2019
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	//Variable Declaration
+	double fahrenheit;
+	double celsius;
+
+	//Input from the user
+	cout << "Please, enter temperature in Fahrenheit: ";
+	cin >> fahrenheit;
+
+	//Convertion to Celsius
+	celsius = (fahrenheit - 32) * 5 / 9;
+
+	//Output result to the user
+	cout << "The temperature " << fahrenheit << " Fahrenheit is equivalent to " << static_cast<int>(celsius) << " Celsius" << endl;
+
+	return 0;
+}
