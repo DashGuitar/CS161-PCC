@@ -1,1 +1,74 @@
-// Writen by Dashel Ruiz Perez
+//Programm that reads from a file , make calculations and output to the file
+//Assignment:
+/*Cindy uses the services of a brokerage firm to buyand sell stocks.The firm charges 1.5% service charges on the total amount for each transaction, buy or sell.When Cindy sells stocks, she would like to know if she gained or lost on a particular investment.
+Write a program that allows Cindy to read input from a file called Stock.txt:
+1. The name of the stock.
+2. The purchase price of each stock
+3. The selling price of each stock
+4. The number of stock sold
+5. Assumption : Number of stocks boughtand sold are equal.
+The program writes the following output to a file called StockOutput.txt :
+	1. The name of the stock
+	2. The amount invested
+	3. The amount received after selling the stock.
+	4. The total service charges
+	5. Amount gained or lost
+	The output file should be formattedand look like this:
+Stock_Name Investment Received Service Charge Profit / Loss
+INTC 1522.50 1945.38 52.13 422.88
+*/
+//Writen by: Dashel Ruiz Perez
+//Date: 1/26/2019
+
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+double const SERVICE_CHARGE = 1.5 / 100;
+
+int main()
+{
+	//Variable declaration (In)
+	ifstream infile;
+	ofstream outfile;
+	string stockName;
+	double stockPurchasePrice;
+	double stockSellPrice;
+	int stockAmount;
+	//Variables (out)
+	double amountInvested;
+	double amountAfterSellingStock;
+	double amountInvestedTotal;
+	double amountAfterSellingStockTotal;
+	double totalGainLost;
+	double totalServiceCharges;
+
+	//Open and read file 
+	infile.open("stock.txt");
+	outfile.open("stockout.txt");
+
+	infile >> stockName >> stockPurchasePrice >> stockSellPrice >> stockAmount;
+
+	//Calculations
+	amountInvested = stockPurchasePrice * stockAmount;
+	amountInvestedTotal = amountInvested + amountInvested * SERVICE_CHARGE;
+
+	amountAfterSellingStock = stockAmount * stockSellPrice;
+	amountAfterSellingStockTotal = amountAfterSellingStock - amountAfterSellingStock * SERVICE_CHARGE;
+
+	totalServiceCharges = amountInvested * SERVICE_CHARGE + amountAfterSellingStock * SERVICE_CHARGE;
+	totalGainLost = amountAfterSellingStockTotal - amountInvestedTotal;
+	
+
+	//Output in the txt file
+	outfile << fixed << showpoint << setprecision(2);
+	outfile << left << setw(15) << "Stock_Name" << setw(15) << "Investment" << setw(15) << "Received" << setw(15) << "Charges" << setw(15) << "Gain/Lost" << endl;
+	outfile << left << setw(15) << stockName << setw(15) << amountInvestedTotal << setw(15) << amountAfterSellingStockTotal << setw(15) << totalServiceCharges << setw(15) << totalGainLost;
+
+	infile.close();
+	outfile.close();
+	return 0;
+}
