@@ -1,0 +1,122 @@
+// Assingment 4 CS 161 
+// Airline fare calculator
+// Writen by: Dashel Ruiz Perez
+// Date: 2/1/2019
+// Source: None
+
+#include <iostream>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	//Variable Passangers
+	int adults;
+	int children;
+	int senior;
+	int infants;
+	int totalPassangers;
+	int totalBaggage;
+	//Variables Prices and baggage 
+	double adultTickect = 147.30;
+	double seniorTicket = 137.75;
+	double childTickect = 110.25;
+	double totalFare;
+	double totalFareCost;
+
+	int age;
+	int baggage = 0;
+	int firstBaggage;
+	int secondBaggage;
+	int baggagePrice = 20;
+	int baggagePriceDos = 35;
+	char decision;
+	char reply;
+
+	//Asking for user input
+	cout << "Enter your name: ";
+	cin >> age;
+
+	while (!cin)
+	{
+		cin.clear();
+		cin.ignore(100, '\n');
+		cout << "Please enter a valid age: ";
+		cin >> age;
+	}
+	// Verifying the age 
+	if (age < 18)
+	{
+		cout << "You are a minor. Please, ask an adult to purchase the tickects!" << endl;
+		cout << "Thanks you!" << endl;
+		cout << "Enter q to quit: ";
+		cin >> reply;
+		exit(1);
+	}
+		
+	//Esplaining what the program does
+	cout << "This is a fare calulator.\n";
+	cout << "Please enter the number of passangers and baggage correctly\n";
+	cout << "Passanger name, and number of baggage will be verify at the aerport\n";
+
+	//Decisions
+	cout << "Do you want to purchase the tickets?";
+	cin >> decision;
+
+	if (decision == 'n' || decision == 'N')
+	{
+		cout << "Bye, come back when you are ready to purchase the tickets!\n";
+		cout << "Press any key to quit!";
+		cin >> reply;
+		exit (1);
+	}
+	else
+	{
+		cout << "Be ready to enter all theinformation!\n";
+		cout << endl;
+	}
+
+	cout << fixed << showpoint << setprecision(2);
+	// Entering the info
+	cout << "Enter number of adults (age 14 - 64): ";
+	cin >> adults;
+	cout << endl;
+	cout << "Enter number of seniors (more than age 65): ";
+	cin >> senior;
+	cout << endl;
+	cout << "Enter number of children (age 3 - 14): ";
+	cin >> children;
+	cout << endl;
+	cout << "Enter number of infants (under age 2): ";
+	cin >> infants;
+	cout << endl;
+	cout << "Enter number of checked in baggage: ";
+	cin >> baggage;
+	cout << endl;
+
+	//Calculations
+	totalPassangers = adults + senior + children + infants;
+	totalFare = (adults * adultTickect) + (senior * seniorTicket) + (children * childTickect);
+
+	if (baggage > totalPassangers)
+	{
+		secondBaggage = baggage - totalPassangers;
+		firstBaggage = baggage - secondBaggage;
+		totalBaggage = (firstBaggage * baggagePrice) + (secondBaggage * baggagePriceDos);
+	}
+	else
+	{
+		totalBaggage = baggage * baggagePrice;
+	}
+
+	totalFareCost = totalFare + totalBaggage;
+
+	cout << "Total fare including checked in luggage is " << totalFareCost << endl;
+
+
+
+
+	return 0;
+}
